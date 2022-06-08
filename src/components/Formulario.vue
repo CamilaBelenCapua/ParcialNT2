@@ -3,7 +3,6 @@
      <div class="Formulario">
       <h2>Notas</h2>
         <hr>
-        <hr> 
         <br>
         <vue-form :state="formState" @submit.prevent="enviar()">
         
@@ -117,17 +116,19 @@
                     <th>Nota</th>
                 </tr>
               </thead>
+
                   <tr v-for="(alumno,index) in alumnos" :key="index" :class="alumno.backgroung">
                       <td>{{ alumno.nombre + ' ' + alumno.apellido}}</td>
                       <td>{{ alumno.nota}}</td>
                   </tr>
-                    <tr>
+                   <tr>
                         <td>Promedio</td>
-                        <td>{{calculoPromedio(alumno.nota)}}</td>
-                    </tr>
+                        <td>{{calculoPromedio()}}</td>
+                    </tr>     
             </table>
           </div>
         </span>
+
         <span v-else class="alert alert-warning">
                   No hay notas cargadas
         </span>
@@ -173,8 +174,13 @@ export default {
         this.formData = this.getInicialData()
         this.formState._reset()
       },
-      calculoPromedio(nota) {
-        return nota - this.promedio
+      calculoPromedio() {
+        const sumaNotas=0;
+        if(this.alumnos.length>0){
+          let suma = this.alumnos.reduce((valorPrevio, alumno) => valorPrevio + alumno.nota, sumaNotas);
+          this.promedio = suma / this.alumnos.length
+        }
+        return this.promedio
       }
 
     },
