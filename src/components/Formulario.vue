@@ -119,10 +119,10 @@
                       <td>{{ alumno.nombre + ' ' + alumno.apellido}}</td>
                       <td>{{ alumno.nota}}</td>
                   </tr>
-                   <tr>
+                  <tr>
                         <td>Promedio</td>
                         <td>{{calculoPromedio()}}</td>
-                    </tr>     
+                    </tr> 
             </table>
           </div>
         </span>
@@ -186,12 +186,12 @@ export default {
        notasModificadas: function () {
     return this.alumnos.map((alumno) => {
       let colorNota = null
-      if(alumno.nota>=0 && alumno.nota<4 ){
-        colorNota = "table-danger"  
+      if(alumno.nota>=0 && alumno.nota<4){
+        colorNota = "text-danger"  
       }else if(alumno.nota>=4 && alumno.nota<7){
-        colorNota = "table-warning"
+        colorNota = "text-warning"
       }else{
-        colorNota = "table-primary"
+        colorNota = "text-success"
       }
       return {
         nombre: alumno.nombre,
