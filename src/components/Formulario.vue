@@ -109,15 +109,13 @@
          <hr>
         <span v-if="alumnos.length">
           <div class="table-responsive">
-            <table class="table">
-              <thead class="table-dark">
+            <table class="table table-dark">
                 <tr>
                     <th>Alumno</th>
                     <th>Nota</th>
                 </tr>
-              </thead>
 
-                  <tr v-for="(alumno,index) in alumnos" :key="index" :class="alumno.backgroung">
+                  <tr v-for="(alumno,index) in notasModificadas" :key="index" :class="alumno.colorNota">
                       <td>{{ alumno.nombre + ' ' + alumno.apellido}}</td>
                       <td>{{ alumno.nota}}</td>
                   </tr>
@@ -174,6 +172,7 @@ export default {
         this.formData = this.getInicialData()
         this.formState._reset()
       },
+
       calculoPromedio() {
         const sumaNotas=0;
         if(this.alumnos.length>0){
@@ -182,10 +181,27 @@ export default {
         }
         return this.promedio
       }
-
     },
     computed: {
+       notasModificadas: function () {
+    return this.alumnos.map((alumno) => {
+      let colorNota = null
+      if(alumno.nota>=0 && alumno.nota<4 ){
+        colorNota = "table-danger"  
+      }else if(alumno.nota>=4 && alumno.nota<7){
+        colorNota = "table-warning"
+      }else{
+        colorNota = "table-primary"
+      }
+      return {
+        nombre: alumno.nombre,
+        apellido: alumno.apellido,
+        nota: alumno.nota,
+        colorNota: colorNota
+      }
+    })
     }
+  }
 }
 </script>
 
