@@ -120,8 +120,8 @@
                       <td>{{ alumno.nota}}</td>
                   </tr>
                   <tr>
-                        <td>Promedio</td>
-                        <td>{{calculoPromedio()}}</td>
+                        <td :class="colorPromedio">Promedio</td>
+                        <td :class="colorPromedio">{{calculoPromedio()}}</td>
                     </tr> 
             </table>
           </div>
@@ -200,9 +200,22 @@ export default {
         colorNota: colorNota
       }
     })
-    }
+    },
+
+    colorPromedio: function () {
+      let color = null
+      if(this.calculoPromedio()>=0 && this.calculoPromedio()<4){
+         color = "text-danger"  
+      }else if(this.calculoPromedio()>=4 && this.calculoPromedio()<7){
+         color = "text-warning" 
+      }else{
+         color = "text-success"
+      }
+      return color
+      }
+    }    
   }
-}
+
 </script>
 
 
